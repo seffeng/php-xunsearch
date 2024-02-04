@@ -1,16 +1,15 @@
 {
-	"name": "hightman/xunsearch",
+	"name": "seffeng/xunsearch",
 	"description": "xunsearch php sdk, include yii, yii2 supports",
 	"keywords": ["xunsearch", "search engine", "yii", "yii2"],
-	"homepage": "http://www.xunsearch.com/",
+	"homepage": "https://github.com/seffeng/php-xunsearch",
 	"type": "library",
 	"license": "GPL-2.0+",
 	"authors": [
 		{
-			"name": "hightman",
-			"email": "hightman@twomice.net",
-			"homoepage": "http://hightman.cn/",
-			"role": "Founder and project leader"
+            "name": "seffeng",
+            "email": "save.zxf@gmail.com",
+            "homepage": "https://github.com/seffeng"
 		}
 	],
 	"support": {
