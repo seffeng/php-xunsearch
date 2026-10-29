@@ -707,9 +707,13 @@ spl_autoload_register('XS::autoload', true, true);
  */
 function xsErrorHandler($errno, $error, $file, $line)
 {
-	if (($errno & ini_get('error_reporting')) && !strncmp($file, XS_LIB_ROOT, strlen(XS_LIB_ROOT))) {
-		throw new XSErrorException($errno, $error, $file, $line);
-	}
-	return false;
+	if (!($errno & ini_get('error_reporting')) || strncmp($file, XS_LIB_ROOT, strlen(XS_LIB_ROOT))) {
+        return false;
+    }
+    // 弃用不应中断业务流程，交回上层 handler（Laravel/框架自己记日志）
+    if ($errno & (E_DEPRECATED | E_USER_DEPRECATED)) {
+        return false;
+    }
+    throw new XSErrorException($errno, $error, $file, $line);
 }
 set_error_handler('xsErrorHandler');

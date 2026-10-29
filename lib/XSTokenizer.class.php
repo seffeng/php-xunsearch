@@ -30,12 +30,12 @@ interface XSTokenizer
 	 * @param XSDocument $doc 当前相关的索引文档
 	 * @return array 切好的词组成的数组
 	 */
-	public function getTokens($value, XSDocument $doc = null);
+	public function getTokens($value, ?XSDocument $doc = null);
 }
 
 /**
  * 内置空分词器
- * 
+ *
  * @author hightman <hightman@twomice.net>
  * @version 1.0.0
  * @package XS.tokenizer
@@ -43,7 +43,7 @@ interface XSTokenizer
 class XSTokenizerNone implements XSTokenizer
 {
 
-	public function getTokens($value, XSDocument $doc = null)
+	public function getTokens($value, ?XSDocument $doc = null)
 	{
 		return array();
 	}
@@ -51,7 +51,7 @@ class XSTokenizerNone implements XSTokenizer
 
 /**
  * 内置整值分词器
- * 
+ *
  * @author hightman <hightman@twomice.net>
  * @version 1.0.0
  * @package XS.tokenizer
@@ -59,7 +59,7 @@ class XSTokenizerNone implements XSTokenizer
 class XSTokenizerFull implements XSTokenizer
 {
 
-	public function getTokens($value, XSDocument $doc = null)
+	public function getTokens($value, ?XSDocument $doc = null)
 	{
 		return array($value);
 	}
@@ -67,7 +67,7 @@ class XSTokenizerFull implements XSTokenizer
 
 /**
  * 内置的分割分词器
- * 
+ *
  * @author hightman <hightman@twomice.net>
  * @version 1.0.0
  * @package XS.tokenizer
@@ -83,7 +83,7 @@ class XSTokenizerSplit implements XSTokenizer
 		}
 	}
 
-	public function getTokens($value, XSDocument $doc = null)
+	public function getTokens($value, ?XSDocument $doc = null)
 	{
 		if (strlen($this->arg) > 2 && substr($this->arg, 0, 1) == '/' && substr($this->arg, -1, 1) == '/') {
 			return preg_split($this->arg, $value);
@@ -94,7 +94,7 @@ class XSTokenizerSplit implements XSTokenizer
 
 /**
  * 内置的定长分词器
- * 
+ *
  * @author hightman <hightman@twomice.net>
  * @version 1.0.0
  * @package XS.tokenizer
@@ -113,7 +113,7 @@ class XSTokenizerXlen implements XSTokenizer
 		}
 	}
 
-	public function getTokens($value, XSDocument $doc = null)
+	public function getTokens($value, ?XSDocument $doc = null)
 	{
 		$terms = array();
 		for ($i = 0; $i < strlen($value); $i += $this->arg) {
@@ -125,7 +125,7 @@ class XSTokenizerXlen implements XSTokenizer
 
 /**
  * 内置的步长分词器
- * 
+ *
  * @author hightman <hightman@twomice.net>
  * @version 1.0.0
  * @package XS.tokenizer
@@ -144,7 +144,7 @@ class XSTokenizerXstep implements XSTokenizer
 		}
 	}
 
-	public function getTokens($value, XSDocument $doc = null)
+	public function getTokens($value, ?XSDocument $doc = null)
 	{
 		$terms = array();
 		$i = $this->arg;
@@ -217,7 +217,7 @@ class XSTokenizerScws implements XSTokenizer
 	/**
 	 * XSTokenizer 接口
 	 */
-	public function getTokens($value, XSDocument $doc = null)
+	public function getTokens($value, ?XSDocument $doc = null)
 	{
 		$tokens = array();
 		$this->setIgnore(true);
@@ -263,7 +263,7 @@ class XSTokenizerScws implements XSTokenizer
 	/**
 	 * 设置复合分词选项
 	 * @param int $mode 复合选项, 值范围 0~15
-	 *  默认为值为 3, 可使用常量组合: 
+	 *  默认为值为 3, 可使用常量组合:
 	 *  SCWS_MULTI_SHORT|SCWS_MULTI_DUALITY|SCWS_MULTI_ZMAIN|SCWS_MULTI_ZALL
 	 * @return XSTokenizerScws 返回对象本身以支持串接操作
 	 */
@@ -355,7 +355,7 @@ class XSTokenizerScws implements XSTokenizer
 	 * 获取重要词统计结果
 	 * @param string $text 待分词的文本
 	 * @param string $xattr 在返回结果的词性过滤, 多个词性之间用逗号分隔, 以~开头取反
-	 *  如: 设为 n,v 表示只返回名词和动词; 设为 ~n,v 则表示返回名词和动词以外的其它词 
+	 *  如: 设为 n,v 表示只返回名词和动词; 设为 ~n,v 则表示返回名词和动词以外的其它词
 	 * @return array 返回词汇数组, 每个词汇是包含 [times:次数,attr:词性,word:词]
 	 */
 	public function getTops($text, $limit = 10, $xattr = '')

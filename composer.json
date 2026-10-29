@@ -19,7 +19,7 @@
 		"source": "https://github.com/hightman/xunsearch/"
 	},
 	"require": {
-		"php": ">=5.3.0",
+		"php": ">=7.3",
 		"ext-mbstring": "*",
 		"lib-pcre": "*"
 	},
